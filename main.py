@@ -1,16 +1,20 @@
-# This is a sample Python script.
+#Author: Eoghan Spillane
+#Description:
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+#pip install numpy==1.19.3
+#pip install pandas
+#pip install -U matplotlib
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def import_data():
+    data = pd.read_csv('us-Hotel.csv')
+    return data
 
+def main():
+    print(import_data())
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+main()
