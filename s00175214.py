@@ -55,7 +55,8 @@ def task1():
 
 def task2():
     data = import_data()
-    hostsNumbers = data.groupby(['host_id', 'host_name'])['host_id'].count().sort_values(ascending=False).nlargest(20,'first')
+    hostsNumbers = data.groupby(['host_id', 'host_name'])['host_id'].count().sort_values(ascending=False).nlargest(20,
+                                                                                                                   'first')
     # hosts = data.groupby(['host_id', 'host_name'])
     # bigHosts = hosts.count().sort_values(ascending=False).nlargest(20, 'first')
     labels = hostsNumbers.keys()
@@ -101,6 +102,7 @@ def task3():
     It's also more common to charge at €50 intervals which can be seen by the spikes located at 100, 150, 200, 250 etc
     """
 
+
 def task4():
     data = import_data()
     less500 = data[data['price'] <= 500]
@@ -108,7 +110,7 @@ def task4():
     prices = range['price']
 
     plt.hist(prices, bins=100)
-    plt.title("Prices Under 500 and over 150")
+    plt.title("Prices Under $500 and over $150")
     plt.xlabel("Cost Per Night")
     plt.ylabel("Frequency of price")
 
@@ -121,12 +123,40 @@ def task4():
     and all of the hotels charging between 300 and 500.
     """
 
+
 def task5():
     data = import_data()
     accomodationTypes = pd.unique(data['room_type'])
 
-    #print(accomodationTypes)
+    privateRoom = data[data['room_type'] == "Private room"]
+    privateRoomPrice = np.average(privateRoom['price'])
 
+    house = data[data['room_type'] == "Entire home/apt"]
+    housePrice = np.average(house['price'])
 
+    hotel = data[data['room_type'] == "Hotel room"]
+    hotelPrice = np.average(hotel['price'])
 
+    share = data[data['room_type'] == "Shared room"]
+    sharePrice = np.average(share['price'])
+
+    values = [privateRoomPrice, housePrice, hotelPrice, sharePrice]
+    labels = ['Private room - $' + str(float(privateRoomPrice).__round__()),'Entire home/apt - $' + str(float(housePrice).__round__()),'Hotel room - $' + str(float(hotelPrice).__round__()),'Shared room - $' + str(float(sharePrice).__round__())]
+
+    plt.bar(labels, values, width=0.4)
+    plt.xticks(rotation=30, ha='right')
+    plt.xlabel("Room Types")
+    plt.ylabel("Average Cost in $")
+    plt.title("Average Cost of accommodation per night")
+    plt.show()
+
+    """
+    From Looking at the data it appear a shared room like a hostel is on average the cheapest overnight accomodation,
+    with a hotel being the most expensive on average
+    """
+
+task1()
+task2()
+task3()
+task4()
 task5()
