@@ -1,7 +1,7 @@
 # !/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 19 14:18:40 2020
+Created on Mon Nov 23 17:45:12 2020
 @Student name: Eoghan Spillane
 @Student ID: R00175214
 @Student Course Name: SDH3-B
@@ -47,7 +47,10 @@ def task1():
     plt.title("Hotel Cost Per Night (Sample Size = 226,030)")
     plt.show()
 
-    # This data is showing me how many hotels charge in the different price brackets. I.e. 43% of the hotels charge less than €105 per night.
+    """
+    This data is showing me how many hotels charge in the different price brackets. 
+    I.e. 43% of the hotels charge less than €105 per night.
+    """
 
 
 def task2():
@@ -58,7 +61,6 @@ def task2():
     labels = hostsNumbers.keys()
 
     hostName = []
-    hostId = []
     values = []
 
     for x in hostsNumbers:
@@ -66,7 +68,6 @@ def task2():
 
     for x in labels:
         name = str(x[0]) + ": " + str(x[1])
-        hostId.append(x[0])
         hostName.append(name)
 
     plt.bar(hostName, values, width=0.4)
@@ -75,6 +76,11 @@ def task2():
     plt.ylabel("No. of Accommodations")
     plt.title("20 Largest Hotel Moguls")
     plt.show()
+
+    """
+    Looking at the data, even though these are the 20 biggest hotel mogul's, it's clear that both Zues and Blueground
+    own significantly more than the following moguls. This is most likely indicitive of a large hotel chain, hotels etc
+    """
 
 
 def task3():
@@ -95,5 +101,32 @@ def task3():
     It's also more common to charge at €50 intervals which can be seen by the spikes located at 100, 150, 200, 250 etc
     """
 
+def task4():
+    data = import_data()
+    less500 = data[data['price'] <= 500]
+    range = less500[less500['price'] > 150]
+    prices = range['price']
 
-task2()
+    plt.hist(prices, bins=100)
+    plt.title("Prices Under 500 and over 150")
+    plt.xlabel("Cost Per Night")
+    plt.ylabel("Frequency of price")
+
+    plt.show()
+
+    """
+    Due to the data having spikes plottig it as a line wouldn't work as the spikes at €50 intervals would mis-vizualize
+    it. That's why I decided to use a histogram as it would display all the values inbetween those spikes.
+    Looking at the graph there are no clear outliers in this range due to the number of hotels charging 500 per night
+    and all of the hotels charging between 300 and 500.
+    """
+
+def task5():
+    data = import_data()
+    accomodationTypes = pd.unique(data['room_type'])
+
+    #print(accomodationTypes)
+
+
+
+task5()
